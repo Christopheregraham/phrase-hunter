@@ -15,6 +15,7 @@ class Game:
                Phrase("The proof of the pudding is in the eating")]
         self.active_phrase = None
         self.missed = 0
+        self.guesses = []
 
     def get_random_phrase(self):
          self.active_phrase = random.choice(self.phrases)
@@ -29,6 +30,8 @@ class Game:
             correct = self.guess(letter)
             if not correct:
                 self.missed += 1
+                self.guesses.append(letter)
+                print(f"Wrong gueses: {','.join(self.guesses)}")
                 print(f"Incorrect! You have {5 - self.missed} guesses left.")
 
         if '_' not in self.active_phrase.display():
