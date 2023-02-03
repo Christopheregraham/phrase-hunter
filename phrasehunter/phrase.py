@@ -4,14 +4,15 @@
 class Phrase:
     def __init__(self, phrase):
         self.phrase = phrase.lower()
-        self.hidden_phrase = ['_' for char in phrase]
+        self.hidden_phrase = ['_' if char != ' ' else ' ' for char in phrase]
+
         self.guessed_letters = []
 
     def display(self):
         return ' '.join(self.hidden_phrase)
 
     def check_letter(self, letter):
-        if letter in self.guessed_letters:
+        if letter in self.guessed_letters or letter == ' ':
             return False
         self.guessed_letters.append(letter)
         if letter in self.phrase:
@@ -20,8 +21,7 @@ class Phrase:
                     self.hidden_phrase[i] = letter
             return True
         else:
+            self.guessed_letters.append(letter)
             return False
 
-    def check_complete(self):
-        return '_' not in self.phrase.hidden_phrase or self.incorrect_guesses >= 5
 
