@@ -26,7 +26,7 @@ class Game:
         while not self.game_over():
             current_phrase = self.active_phrase.display()
             print(f"Current phrase: {current_phrase}")
-            letter = input("Guess a letter: ")
+            letter = input("Guess a letter: ").lower()
             correct = self.guess(letter)
             if not correct:
                 self.missed += 1
